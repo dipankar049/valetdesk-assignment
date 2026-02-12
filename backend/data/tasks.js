@@ -1,6 +1,14 @@
 // In-memory tasks storage
 
-let tasks = [];
+let tasks = [
+  // {
+  //   id: 1,
+  //   title: "Complete assignment",
+  //   description: "Finish ValetDesk React Native assignment",
+  //   details: "Implement list, detail, and create task functionality",
+  //   createdAt: new Date().toISOString()
+  // },
+];
 
 
 // get all tasks
