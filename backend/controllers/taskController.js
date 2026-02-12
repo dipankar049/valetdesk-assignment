@@ -1,4 +1,5 @@
 import {
+    createTask,
   getAllTasks,
   getTaskById,
 } from "../data/tasks.js";
@@ -54,7 +55,42 @@ const getTask = (req, res) => {
   }
 };
 
+const createNewTask = (req, res) => {
+  try {
+    const { title, description, details } = req.body;
+
+    // validation
+    if (!title || !description) {
+      return res.status(400).json({
+        success: false,
+        message: "Title and description are required",
+      });
+    }
+
+    const newTask = createTask({
+      title,
+      description,
+      details
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "Task created successfully",
+      data: newTask,
+    });
+
+  } catch (error) {
+    console.error("Error creating task:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
 export { 
     getTasks,
     getTask,
+    createNewTask,
 };
