@@ -5,7 +5,7 @@ let tasks = [
   //   id: 1,
   //   title: "Complete assignment",
   //   description: "Finish ValetDesk React Native assignment",
-  //   details: "Implement list, detail, and create task functionality",
+  //   details: "This task involves implementing the list, detail, and create task screens in React Native. Ensure proper API integration, error handling, and clean UI styling. Reusable components should be used wherever possible to keep the code organized and maintainable.",
   //   createdAt: new Date().toISOString()
   // },
 ];

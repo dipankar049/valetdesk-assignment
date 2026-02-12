@@ -7,11 +7,12 @@ import {
     StyleSheet,
     Button,
     RefreshControl,
+    TouchableOpacity,
 } from "react-native";
 
 import { fetchTasks } from "../services/taskService";
 import TaskCard from "../components/TaskCard";
-import Header from "../components/Header";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function TaskListScreen({ navigation }) {
     const [tasks, setTasks] = useState([]);
@@ -67,11 +68,18 @@ export default function TaskListScreen({ navigation }) {
     return (
         <View style={styles.container}>
 
-            <Header
-                title="Tasks"
-                rightText="Create"
-                onRightPress={() => navigation.navigate("CreateTask")}
-            />
+            <View style={styles.headerContainer}>
+                
+                <Text style={styles.title}>Tasks</Text>
+
+                <TouchableOpacity
+                    style={styles.rightContainer}
+                    onPress={() => navigation.navigate("CreateTask")}
+                    >
+                    <Ionicons name="add" size={24} color="#007AFF" />
+                    <Text style={styles.rightText}>Create</Text>
+                </TouchableOpacity>
+            </View>
 
             <FlatList
                 data={tasks}
@@ -115,6 +123,26 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 16,
         backgroundColor: "#f5f6fa",
+    },
+    headerContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 16,
+    },
+    title: {
+        fontSize: 26,
+        fontWeight: "bold",
+    },
+    rightContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    rightText: {
+        marginLeft: 4,
+        color: "#007AFF",
+        fontSize: 16,
+        fontWeight: "500",
     },
     center: {
         flex: 1,
