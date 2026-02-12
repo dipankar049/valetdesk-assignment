@@ -1,5 +1,6 @@
 import {
   getAllTasks,
+  getTaskById,
 } from "../data/tasks.js";
 
 const getTasks = (req, res) => {
@@ -24,4 +25,36 @@ const getTasks = (req, res) => {
   }
 };
 
-export { getTasks };
+const getTask = (req, res) => {
+  try {
+    const taskId = req.params.id;
+
+    const task = getTaskById(taskId);
+
+    if (!task) {
+      return res.status(404).json({
+        success: false,
+        message: "Task not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Task fetched successfully",
+      data: task,
+    });
+
+  } catch (error) {
+    console.error("Error fetching task:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+export { 
+    getTasks,
+    getTask,
+};
