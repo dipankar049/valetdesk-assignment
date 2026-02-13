@@ -11,6 +11,7 @@ import {
   Platform,
 } from "react-native";
 import { createTask } from "../services/taskService";
+import Toast from "react-native-toast-message";
 
 export default function CreateTaskScreen({ navigation }) {
   const [title, setTitle] = useState("");
@@ -20,7 +21,11 @@ export default function CreateTaskScreen({ navigation }) {
 
   const handleSubmit = async () => {
     if (!title.trim() || !description.trim()) {
-      Alert.alert("Validation Error", "Title and description are required.");
+      Toast.show({
+        type: 'error',
+        text1: 'Validation Error',
+        text2: 'Title and description are required.',
+      });
       return;
     }
 
@@ -29,15 +34,26 @@ export default function CreateTaskScreen({ navigation }) {
       const response = await createTask({ title, description, details });
 
       if (response.success) {
-        Alert.alert("Success", "Task created successfully!", [
-          { text: "OK", onPress: () => navigation.goBack() },
-        ]);
+        Toast.show({
+          type: 'success',
+          text1: 'Task created successfully!',
+        });
+
+        navigation.goBack();
       } else {
-        Alert.alert("Error", "Failed to create task.");
+        Toast.show({
+          type: 'error',
+          text1: 'Failed to create task',
+        });
       }
     } catch (err) {
       console.error(err);
-      Alert.alert("Error", "Something went wrong.");
+      Toast.show({
+        type: 'error',
+        text1: 'Server Error',
+        text2: 'Failed to create task. Please try again.',
+        position: 'bottom',
+      });
     } finally {
       setLoading(false);
     }
