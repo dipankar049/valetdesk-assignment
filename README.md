@@ -58,3 +58,13 @@ A simple React Native app to manage tasks with a Node.js + Express backend. User
 1. Open the app, view task list.
 2. Tap a task for details.
 3. Tap "Create" to add a new task.
+
+## Future Improvements
+
+If given more time, I would consider the following enhancements:
+
+- Implement editing and deleting of tasks.
+- Add `deadline` and `priority` fields in task and reorder feature in list.
+- Add user authentication to make tasks user-specific.
+- Use a proper backend with persistent storage (database) instead of in-memory storage.
+- Improve UI/UX with better design, animations, and responsive layouts.
