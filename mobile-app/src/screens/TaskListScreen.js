@@ -13,6 +13,7 @@ import {
 import { fetchTasks } from "../services/taskService";
 import TaskCard from "../components/TaskCard";
 import { Ionicons } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function TaskListScreen({ navigation }) {
     const [tasks, setTasks] = useState([]);
@@ -31,15 +32,16 @@ export default function TaskListScreen({ navigation }) {
         }
     };
 
-    useEffect(() => {
-        const init = async () => {
+    useFocusEffect(
+        useCallback(() => {
+            const fetch = async () => {
             setLoading(true);
             await loadTasks();
             setLoading(false);
-        };
-
-        init();
-    }, []);
+            };
+            fetch();
+        }, [])
+    );
 
     const onRefresh = useCallback(async () => {
         setRefreshing(true);
